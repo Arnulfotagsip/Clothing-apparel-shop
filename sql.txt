@@ -1,0 +1,43 @@
+-- 1. Create the database (if not exists)
+CREATE DATABASE IF NOT EXISTS `clothing-apparel-shop` 
+CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- 2. Use the database
+USE `clothing-apparel-shop`;
+
+-- 3. Drop table if you want a fresh start (optional)
+DROP TABLE IF EXISTS daily_sales;
+
+-- 4. Create the exact table you have right now
+CREATE TABLE daily_sales (
+    sale_date DATE NOT NULL UNIQUE,
+    shirts_sold INT NOT NULL,
+    pants_sold INT NOT NULL,
+    jackets_sold INT NOT NULL,
+    total_sold INT AS (shirts_sold + pants_sold + jackets_sold) STORED,
+    revenue DECIMAL(12,2) NOT NULL,
+    PRIMARY KEY (sale_date)
+);
+
+-- 5. Insert your exact 20 days of data (December 2026)
+INSERT INTO daily_sales (sale_date, shirts_sold, pants_sold, jackets_sold, revenue) VALUES
+('2026-12-01', 23, 24, 18, 94935.00),
+('2026-12-02', 21, 26, 20, 99933.00),
+('2026-12-03', 26, 28, 22, 111924.00),
+('2026-12-04', 21, 30, 24, 113925.00),
+('2026-12-05', 23, 29, 23, 112425.00),
+('2026-12-06', 24, 34, 28, 130914.00),
+('2026-12-07', 25, 21, 30, 116424.00),
+('2026-12-08', 21, 38, 32, 141909.00),
+('2026-12-09', 24, 35, 30, 136411.00),
+('2026-12-10', 28, 32, 27, 129913.00),
+('2026-12-11', 21, 31, 26, 119422.00),
+('2026-12-12', 19, 33, 28, 124420.00),
+('2026-12-13', 26, 37, 31, 143406.00),
+('2026-12-14', 24, 39, 33, 148404.00),
+('2026-12-15', 27, 22, 34, 127917.00),
+('2026-12-16', 25, 23, 29, 117423.00),
+('2026-12-17', 30, 16, 30, 113924.00),
+('2026-12-18', 21, 24, 29, 114926.00),
+('2026-12-19', 18, 22, 27, 104933.00),
+('2026-12-20', 20, 21, 26, 103433.00);
